@@ -1,9 +1,9 @@
-import { Menu } from "@/components/menu";
+import { CustomCheckboxGroup } from "@/components/menu";
 
 export default function Home() {
   return (
     <div>
-      <Menu />
+      <CustomCheckboxGroup />
     </div>
   );
 }

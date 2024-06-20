@@ -1,6 +1,7 @@
 "use client";
 
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
+import { CheckboxLabel } from "./checkbox-label";
 import { Button } from "./button";
 
 type CheckboxState = {
@@ -13,8 +14,9 @@ type CheckboxState = {
 
 type PageName = "allPages" | "page1" | "page2" | "page3" | "page4";
 
-export const Menu: FC = () => {
-  const [checkedPages, setCheckedPages] = useState<CheckboxState>({
+export const CustomCheckboxGroup: FC = () => {
+  // Define the state to manage the checkbox selections
+  const [checkedPages, setCheckedPages] = useState({
     allPages: false,
     page1: false,
     page2: false,
@@ -47,35 +49,40 @@ export const Menu: FC = () => {
       return updatedState;
     });
   };
-  return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="bg-white drop-shadow-lg p-10 space-y-5 rounded-md">
-        <label className="flex items-center justify-between">
-          <span>All Pages</span>
 
-          <input
-            type="checkbox"
-            checked={checkedPages["allPages"]}
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-6 rounded-lg shadow-md w-fit">
+        <div className="space-y-4 mb-4">
+          <CheckboxLabel
+            label="All Pages"
+            checked={checkedPages.allPages}
             onChange={() => handleCheckboxChange("allPages")}
-            className="form-checkbox"
           />
-        </label>
-        <div className="border-b" />
-        {["page1", "page2", "page3", "page4"].map((page: string, index) => (
-          <label key={index} className="flex items-center justify-between">
-            <span>{`Page ${index + 1}`}</span>
-            <input
-              type="checkbox"
-              // @ts-ignore
-              checked={checkedPages[page]}
-              // @ts-ignore
-              onChange={() => handleCheckboxChange(page)}
-              className="form-checkbox"
-            />
-          </label>
-        ))}
-        <div className="border-b" />
-        <div />
+          <hr />
+          <CheckboxLabel
+            label="Page 1"
+            checked={checkedPages.page1}
+            onChange={() => handleCheckboxChange("page1")}
+          />
+          <CheckboxLabel
+            label="Page 2"
+            checked={checkedPages.page2}
+            onChange={() => handleCheckboxChange("page2")}
+          />
+          <CheckboxLabel
+            label="Page 3"
+            checked={checkedPages.page3}
+            onChange={() => handleCheckboxChange("page3")}
+          />
+          <CheckboxLabel
+            label="Page 4"
+            checked={checkedPages.page4}
+            onChange={() => handleCheckboxChange("page4")}
+          />
+          <hr />
+        </div>
+
         <Button />
       </div>
     </div>
